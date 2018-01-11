@@ -16,9 +16,8 @@ The purpose of this docker image is to help in the development of ceph.
     # ./do_cmake.sh
     # cd /ceph/build
     # make -j8
-    # exit
 
-### Create a new docker image with all dependencies installed
+### Create a new docker image with all dependencies installed (use a separate terminal)
 
      # docker ps
      # docker commit <CONTAINER_ID> ceph-dev-docker-build
