@@ -14,6 +14,7 @@ The purpose of this docker image is to help in the development of ceph.
     # cd /ceph
     # ./install-deps.sh
     # ./do_cmake.sh
+    # cd /ceph/build
     # make -j8
     # exit
 
