@@ -4,6 +4,11 @@ The purpose of this docker image is to help in the development of ceph.
 
 ## Usage
 
+### Clone ceph
+
+    # git clone <repo>
+    # git submodule update --init --recursive
+
 ### Image build
 
     # docker build -t ceph-dev-docker .
