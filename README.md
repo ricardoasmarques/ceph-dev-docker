@@ -29,7 +29,7 @@ The purpose of this docker image is to help in the development of ceph.
 ### Start ceph development environment
 
      # cd /ceph/build
-     # ../src/vstart.sh
+     # ../src/vstart.sh -d -n -x
 
 ### Test ceph development environment
 
