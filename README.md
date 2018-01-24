@@ -16,6 +16,9 @@ The purpose of this docker image is to help in the development of ceph.
 ### Running the container
 
     # docker run -it -v /home/rimarques-local/projects/ceph:/ceph --net=host ceph-dev-docker /bin/bash
+
+Please note that the mapped Ceph source cannot be used in the Docker container if `./do_cmake.sh` has been called with a path not used by the Docker container.  The source, taken from the example above, is `/home/rimarques-local/projects/ceph` in this case.  If it doesn't compile (due to wrong paths), use a dedicated Ceph source for the Docker container where `./do_cmake.sh` hasn't been called before.
+
     # cd /ceph
     # ./install-deps.sh
     # ./do_cmake.sh
