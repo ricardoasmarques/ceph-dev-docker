@@ -22,7 +22,7 @@ Please note that the mapped Ceph source cannot be used in the Docker container i
 
     # cd /ceph
     # ./install-deps.sh
-    # ./do_cmake.sh
+    # ./do_cmake.sh -DWITH_PYTHON3=ON -DWITH_TESTS=OFF
     # cd /ceph/build
     # make -j8
 
