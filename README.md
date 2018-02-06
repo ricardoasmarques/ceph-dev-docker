@@ -37,17 +37,9 @@ Now start up the container, by mounting the local git clone directory as
 
     # docker run -it -v <ceph-repository>:/ceph --net=host ceph-dev-docker /bin/bash
 
-Please note that the mapped Ceph source cannot be used in the Docker container
-if `./do_cmake.sh` has been called previously with a path different from the one
-used by the Docker container. If it doesn't compile (due to wrong paths), use a
-dedicated Ceph source for the Docker container where `./do_cmake.sh` hasn't been
-called before, or remove the values cached by `cmake`.
+Inside the container, you can call `setup-ceph` to install dependencies and build Ceph.
 
-    # cd /ceph
-    # ./install-deps.sh
-    # ./do_cmake.sh -DWITH_PYTHON3=ON -DWITH_TESTS=OFF
-    # cd /ceph/build
-    # make -j$(nproc)
+    # setup-ceph -DWITH_PYTHON3=ON -DWITH_TESTS=OFF
 
 ### Create a new docker image with all dependencies installed (use a separate terminal)
 
