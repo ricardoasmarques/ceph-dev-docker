@@ -2,7 +2,10 @@
 
 The purpose of this docker image is to ease the local development of Ceph, by
 providing a container-based runtime and development environment (based on
-openSUSE "Tumbleweed"). It uses a local git clone to start up a vStart
+openSUSE "Tumbleweed").
+
+It requires a local git clone to start up a
+[vStart](http://docs.ceph.com/docs/master/dev/dev_cluster_deployement/)
 environment.
 
 ## Usage
@@ -29,21 +32,32 @@ clone from, e.g. `https://github.com/ceph/ceph.git`:
 
     # cd <workdir>
     # git clone <ceph-repository>
+    # cd ceph
+
+Now switch or create your development branch using `git checkout` or `git
+branch`.
     
 ### Starting the Container and building Ceph
 
 Now start up the container, by mounting the local git clone directory as
 `/ceph`:
 
-    # docker run -it -v <ceph-repository>:/ceph --net=host ceph-dev-docker /bin/bash
+    # docker run -it -v $PWD:/ceph --net=host ceph-dev-docker /bin/bash
 
-Inside the container, you can call `setup-ceph` to install dependencies and build Ceph.
+This will start up a shell running inside your development container. Inside the
+container, you can now call `setup-ceph`, which will install all the required
+build dependencies and then build Ceph from source.
 
     # setup-ceph -DWITH_PYTHON3=ON -DWITH_TESTS=OFF
 
 ### Create a new docker image with all dependencies installed (use a separate terminal)
 
-     # docker ps
+Once the build has finished, it's helpful to perform a snapshot of this image,
+to preserve the time-consuming step of installing the build dependencies. While
+the container is still running, observe its `CONTAINER ID` and commit its state
+into a new image:
+
+     # docker ps -f ancestor=ceph-dev-docker
      # docker commit <CONTAINER_ID> ceph-dev-docker-build
 
 ### Running the container with all dependencies installed

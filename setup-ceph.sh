@@ -8,4 +8,10 @@ cd /ceph
 cd /ceph/build
 make -j$(nproc)
 
-pip install -r /ceph/src/pybind/mgr/dashboard_v2/requirements.txt
+if which pip2; then
+    pip2 install -r /ceph/src/pybind/mgr/dashboard_v2/requirements.txt
+fi
+
+if which pip3; then
+    pip3 install -r /ceph/src/pybind/mgr/dashboard_v2/requirements.txt
+fi
