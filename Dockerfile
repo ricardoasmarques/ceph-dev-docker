@@ -8,7 +8,7 @@ RUN zypper -n install \
         python lttng-ust-devel babeltrace-devel \
         librados2 python2-pylint python3-pylint \
         bash vim tmux git aaa_base ccache \
-        python-devel python-Cython python-PrettyTable
+        python-devel python-Cython python-PrettyTable psmisc
 
 ADD setup-ceph.sh /root/bin/setup-ceph
 ADD bash.bashrc /etc/bash.bashrc
