@@ -66,9 +66,21 @@ into a new image:
 
 ### Start Ceph Development Environment
 
+To start up the compiled Ceph cluster, you can use the `vstart.sh` script, which
+spawns up an entire cluster (MONs, OSDs, Mgr) in your development environment.
+See the
+[documentation](http://docs.ceph.com/docs/master/dev/dev_cluster_deployement/)
+and the output of `vstart.sh --help` for details.
+
+To start an environment from scratch with debugging enabled, use the following
+command:
+
      # cd /ceph/build
      # ../src/vstart.sh -d -n -x
 
+**Note:** The `-d` option enables debug output. Keep a close eye on the growth
+of the log files created in `build/out`, as they can grow very quickly (several
+GB within a few hours).
 ### Test Ceph Development Environment
 
      # cd /ceph/build
