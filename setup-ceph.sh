@@ -4,14 +4,17 @@ set -e
 
 cd /ceph
 ./install-deps.sh
-./do_cmake.sh $@
-cd /ceph/build
-make -j$(nproc)
 
-if which pip2; then
-    pip2 install -r /ceph/src/pybind/mgr/dashboard_v2/requirements.txt
+ARGS="-DWITH_PYTHON3=ON -DWITH_TESTS=OFF -DWITH_CCACHE=ON $ARGS"
+
+if [ -d "build" ]; then
+    git submodule update --init --recursive
+    cd build
+    NPROC=${NPROC:-$(nproc)}
+    cmake -DBOOST_J=$NPROC $ARGS ..
+else
+    ./do_cmake.sh $ARGS
+    cd build
 fi
 
-if which pip3; then
-    pip3 install -r /ceph/src/pybind/mgr/dashboard_v2/requirements.txt
-fi
+ccache make -j$(nproc)
