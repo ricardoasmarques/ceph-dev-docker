@@ -3,6 +3,7 @@
 set -e
 
 cd /ceph
+find . -name \*.pyc -delete
 ./install-deps.sh
 
 ARGS="-DWITH_PYTHON3=ON -DWITH_TESTS=OFF -DWITH_CCACHE=ON $ARGS"
