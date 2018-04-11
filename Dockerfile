@@ -1,6 +1,7 @@
 FROM opensuse:tumbleweed
 LABEL maintainer="rimarques@suse.com"
 
+RUN zypper addrepo https://download.opensuse.org/repositories/security/openSUSE_Tumbleweed/security.repo
 RUN zypper ref
 RUN zypper -n dup
 RUN zypper -n install \
@@ -8,7 +9,7 @@ RUN zypper -n install \
         python lttng-ust-devel babeltrace-devel \
         librados2 python2-pylint python3-pylint \
         bash vim tmux git aaa_base ccache wget jq google-opensans-fonts \
-        python-devel python-Cython python-PrettyTable psmisc \
+        oath-toolkit python-devel python-Cython python-PrettyTable psmisc \
         python2-CherryPy python2-pecan python2-Jinja2 python2-pyOpenSSL
 
 RUN wget https://dl.google.com/linux/linux_signing_key.pub
