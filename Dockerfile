@@ -2,7 +2,7 @@ FROM opensuse:tumbleweed
 LABEL maintainer="rimarques@suse.com"
 
 RUN zypper addrepo https://download.opensuse.org/repositories/security/openSUSE_Tumbleweed/security.repo
-RUN zypper ref
+RUN zypper --gpg-auto-import-keys ref
 RUN zypper -n dup
 RUN zypper -n install \
         iproute2 net-tools-deprecated python2-pip python3-pip \
