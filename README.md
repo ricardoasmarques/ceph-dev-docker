@@ -147,3 +147,30 @@ GB within a few hours).
 
     (docker)# cd /ceph/build
     (docker)# ../src/stop.sh
+
+## Running Grafana, Prometheus and Node Exporter
+
+To run Grafana, Prometheus and the Node Exporter , you can simply use
+`docker-compose`. If you do not have `docker-compose` installed on your system,
+follow these [instructions](https://docs.docker.com/compose/install/).
+
+Running the following command will start all containers, one for each service.
+
+    docker-compose up
+
+Note that this will *not* start `ceph-dev-docker`.
+
+Stopping these containers is as easy as running them:
+
+    docker-compose down
+
+You may want to check the help of docker-compose for starting up containers. It
+contains descriptions on how to force recreation of containeres of rebuilding
+them:
+
+    docker-compose help up
+
+Please also note that Grafana isn't configured automatically for you, so you
+will have to follow these
+[instructions](https://github.com/ceph/ceph/blob/master/doc/mgr/dashboard.rst#enabling-grafana-dashboards)
+to configure Grafana accordingly. The changes although, are persited.
