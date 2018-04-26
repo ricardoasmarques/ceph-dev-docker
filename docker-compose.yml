@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+
+  node-exporter:
+    user: 'root'
+    image: 'quay.io/prometheus/node-exporter'
+    volumes:
+      - '/proc:/host/proc:ro'
+      - '/sys:/host/sys:ro'
+      - '/:/rootfs:ro'
+    network_mode: 'host'
+    command: ['--path.procfs', '/host/proc',
+              '--path.sysfs', '/host/sys',
+              '--collector.filesystem.ignored-mount-points', '^/(sys|proc|dev|host|etc)($$|/)']
+  prometheus:
+    image: 'quay.io/prometheus/prometheus'
+    volumes:
+      - './prometheus.yml:/etc/prometheus/prometheus.yml:ro'
+    container_name: 'prometheus'
+    network_mode: 'host'
+
+  grafana:
+    image: 'grafana/grafana'
+    container_name: 'grafana'
+    network_mode: 'host'
+    volumes:
+      - '~/tmp/grafana:/var/lib/grafana'  # You may want to adapt this!
+      - './grafana.ini:/etc/grafana/grafana.ini:ro'
