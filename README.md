@@ -174,3 +174,11 @@ Please also note that Grafana isn't configured automatically for you, so you
 will have to follow these
 [instructions](https://github.com/ceph/ceph/blob/master/doc/mgr/dashboard.rst#enabling-grafana-dashboards)
 to configure Grafana accordingly. The changes although, are persited.
+
+## Troubleshooting
+
+If you encounter a `permisson denied` when trying to access `/ceph` by, for instance, running `setup-ceph.sh` or simply by trying to list its contents (to verify that it has been mounted correctly), the chances are high that your host system uses SELinux. To circumvent that problem, you can simply disable SELinux by running:
+
+    sudo setenforce permissive
+
+This puts SELinux in permissive mode, where the rules are still evaluated but not enforced, they are only logged. This basically *disables* SELinux, making the host system more vulnerable for security flaws.
