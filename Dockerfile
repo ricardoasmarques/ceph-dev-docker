@@ -19,6 +19,11 @@ RUN zypper -n in google-chrome-stable
 ENV CHROME_BIN /usr/bin/google-chrome
 
 ADD setup-ceph.sh /root/bin/setup-ceph
+ADD start-ceph.sh /root/bin/start-ceph
+ADD stop-ceph.sh /root/bin/stop-ceph
+ADD reload-dashboard.sh /root/bin/reload-dashboard
+ADD setup-proxy.sh /root/bin/setup-proxy
+ADD npm-start.sh /root/bin/npm-start
 ADD bash.bashrc /etc/bash.bashrc
 
 VOLUME ["/ceph"]
