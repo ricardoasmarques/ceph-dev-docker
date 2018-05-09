@@ -124,20 +124,20 @@ Now if you want to access this container just run,
 ### Start Ceph Development Environment
 
 To start up the compiled Ceph cluster, you can use the `vstart.sh` script, which
-spawns up an entire cluster (MONs, OSDs, Mgr) in your development environment.
+spawns up an entire cluster (MONs, OSDs, Mgr) in your development environment or
+you can use the `ceph-start` script available in this docker image.
 See the
 [documentation](http://docs.ceph.com/docs/master/dev/dev_cluster_deployement/)
 and the output of `vstart.sh --help` for details.
 
-To start an environment from scratch with debugging enabled, use the following
-command:
+To start an environment from scratch with debugging enabled, use the following command:
 
-    (docker)# cd /ceph/build
-    (docker)# ../src/vstart.sh -d -n -x
+    (docker)# start-ceph
 
-**Note:** The `-d` option enables debug output. Keep a close eye on the growth
+**Note:** This script uses the `vstart` `-d` option that enables debug output. Keep a close eye on the growth
 of the log files created in `build/out`, as they can grow very quickly (several
 GB within a few hours).
+
 ### Test Ceph Development Environment
 
     (docker)# cd /ceph/build
@@ -145,8 +145,23 @@ GB within a few hours).
 
 ### Stop Ceph development environment
 
-    (docker)# cd /ceph/build
-    (docker)# ../src/stop.sh
+    (docker)# stop-ceph
+
+## Working on ceph dashboard
+
+There are some scripts that can be useful if you are working on ceph dashboard.
+
+### Reload dashboard module (Backend)
+
+Run the following script to reflect changes in python files:
+
+    (docker)# reload-dashboard.sh
+
+### Start development server (Frontend)
+
+The following script will start a frontend development server that can be accessed at [http://localhost:4200](http://localhost:4200):
+
+    (docker)# npm-start.sh
 
 ## Running Grafana, Prometheus and Node Exporter
 
