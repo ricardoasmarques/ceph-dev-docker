@@ -119,7 +119,7 @@ For example:
 
 Now if you want to access this container just run,
 
-    # docker attacch new-ceph-container
+    # docker attach new-ceph-container
 
 ### Start Ceph Development Environment
 
