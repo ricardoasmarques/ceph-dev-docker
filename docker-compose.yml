@@ -1,7 +1,6 @@
 version: '3'
 
 services:
-
   node-exporter:
     user: 'root'
     image: 'quay.io/prometheus/node-exporter'
@@ -27,3 +26,17 @@ services:
     volumes:
       - '~/tmp/grafana:/var/lib/grafana'  # You may want to adapt this!
       - './grafana.ini:/etc/grafana/grafana.ini:ro'
+
+  openldap:
+    image: osixia/openldap:1.2.0
+    ports:
+      - "2389:389"
+
+  phpldapadmin:
+    image: osixia/phpldapadmin:0.7.1
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: openldap
+    ports:
+      - "90:443"
+    links:
+      - openldap
