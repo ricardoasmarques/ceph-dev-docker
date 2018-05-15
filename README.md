@@ -159,15 +159,17 @@ Run the following script to reflect changes in python files:
 
 ### Start development server (Frontend)
 
-The following script will start a frontend development server that can be accessed at [http://localhost:4200](http://localhost:4200):
+The following script will start a frontend development server that can be
+accessed at [http://localhost:4200](http://localhost:4200):
 
     (docker)# npm-start.sh
 
-## Running Grafana, Prometheus and Node Exporter
+## External services
 
-To run Grafana, Prometheus and the Node Exporter , you can simply use
-`docker-compose`. If you do not have `docker-compose` installed on your system,
-follow these [instructions](https://docs.docker.com/compose/install/).
+To run preconfigured external services, you can simply use `docker-compose`.
+
+> If you do not have `docker-compose` installed on your system, follow these
+[instructions](https://docs.docker.com/compose/install/).
 
 Running the following command will start all containers, one for each service.
 
@@ -185,10 +187,20 @@ them:
 
     docker-compose help up
 
-Please also note that Grafana isn't configured automatically for you, so you
+After starting all containers, the following external services will be available:
+
+| Tool           | URL                   | User                       | Pass  |
+| -------------- | --------------------- | -------------------------- | ----- |
+| Grafana        |                       |                            |       |
+| Prometheus     |                       |                            |       |
+| Node Exporter  |                       |                            |       |
+| LDAP           | ldap://localhost:2389 | cn=admin,dc=example,dc=org | admin |
+| PHP LDAP Admin | https://localhost:90  | cn=admin,dc=example,dc=org | admin |
+
+> Please note that Grafana isn't configured automatically for you, so you
 will have to follow these
 [instructions](https://github.com/ceph/ceph/blob/master/doc/mgr/dashboard.rst#enabling-grafana-dashboards)
-to configure Grafana accordingly. The changes although, are persited.
+to configure Grafana accordingly. The changes although, are persisted.
 
 ## Troubleshooting
 
