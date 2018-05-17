@@ -49,7 +49,7 @@ Now start up the container, by mounting the local git clone directory as
 
     # docker run -itd \
       -v $PWD:/ceph \
-      -v <CCACHE_DIR>:/root/.ccache \
+      -v ~/.ccache:/root/.ccache \
       --net=host \
       --name=ceph-dev \
       --hostname=ceph-dev \
@@ -59,7 +59,7 @@ Now start up the container, by mounting the local git clone directory as
 
 Lets walk through some of the flags from the above command:
 - `-d`: runs the container shell in detach mode
- - `<CCACHE_DIR>`: the directory where ccache will store its data
+ - `~/.ccache`: the directory where ccache will store its data
  - `--name`: custom name for the container, this can be used for managing
     the container
  - `--hostname`: custom hostname for the docker container, it helps to
@@ -109,7 +109,7 @@ For example:
 
     # docker run -itd \
       -v $PWD:/ceph \
-      -v <CCACHE_DIR>:/root/.ccache \
+      -v ~/.ccache:/root/.ccache \
       --net=host \
       --name=new-ceph-container \
       --hostname=new-ceph-container \
