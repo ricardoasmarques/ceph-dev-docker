@@ -194,6 +194,7 @@ After starting all containers, the following external services will be available
 | Grafana        |                       |                            |       |
 | Prometheus     |                       |                            |       |
 | Node Exporter  |                       |                            |       |
+| Keycloak       | http://localhost:8080 | admin                      | admin |
 | LDAP           | ldap://localhost:2389 | cn=admin,dc=example,dc=org | admin |
 | PHP LDAP Admin | https://localhost:90  | cn=admin,dc=example,dc=org | admin |
 

@@ -27,6 +27,15 @@ services:
       - '~/tmp/grafana:/var/lib/grafana'  # You may want to adapt this!
       - './grafana.ini:/etc/grafana/grafana.ini:ro'
 
+  keycloak:
+    image: jboss/keycloak
+    environment:
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+      DB_VENDOR: H2
+    ports:
+      - "8080:8080"
+
   openldap:
     image: osixia/openldap:1.2.0
     ports:
