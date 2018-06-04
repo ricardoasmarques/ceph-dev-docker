@@ -49,3 +49,13 @@ services:
       - "90:443"
     links:
       - openldap
+
+  shibboleth:
+    build:
+      context: ./shibboleth
+      dockerfile: Dockerfile
+    ports:
+      - "9080:9080"
+      - "9443:9443"
+    links:
+      - openldap
