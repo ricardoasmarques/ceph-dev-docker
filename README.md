@@ -197,6 +197,7 @@ After starting all containers, the following external services will be available
 | Keycloak       | http://localhost:8080 | admin                      | admin |
 | LDAP           | ldap://localhost:2389 | cn=admin,dc=example,dc=org | admin |
 | PHP LDAP Admin | https://localhost:90  | cn=admin,dc=example,dc=org | admin |
+| Shibboleth     | http://localhost:9080/Shibboleth.sso/Status |      |       |
 
 > Please note that Grafana isn't configured automatically for you, so you
 will have to follow these
