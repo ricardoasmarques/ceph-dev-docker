@@ -46,7 +46,10 @@ RUN sed -i -e 's!localhost/!localhost:9443/!g' /opt/shibboleth-idp/metadata/idp-
 RUN sed -i -e 's/#idp.encryption.optional = false/idp.encryption.optional = true/g' /opt/shibboleth-idp/conf/idp.properties
 ADD files/metadata-providers.xml /opt/shibboleth-idp/conf/
 
+ADD files/ldap.properties /opt/shibboleth-idp/conf/
 ADD files/start.sh /
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /
+RUN chmod +x /wait-for-it.sh
 
 ENTRYPOINT [ "/start.sh" ]
 

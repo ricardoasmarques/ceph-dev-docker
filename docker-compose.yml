@@ -38,6 +38,8 @@ services:
 
   openldap:
     image: osixia/openldap:1.2.0
+    environment:
+      LDAP_TLS_VERIFY_CLIENT: try
     ports:
       - "2389:389"
 
