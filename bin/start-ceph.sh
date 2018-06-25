@@ -2,6 +2,8 @@
 
 set -e
 
+find /ceph/build/out/ -name "mgr.*.log" -type f -delete
+
 cd /ceph/build
 RGW=1 ../src/vstart.sh -d -n -x
 
