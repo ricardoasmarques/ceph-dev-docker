@@ -6,7 +6,7 @@ cd /ceph
 find . -name \*.pyc -delete
 ./install-deps.sh
 
-ARGS="-DWITH_PYTHON3=ON -DWITH_TESTS=OFF -DWITH_CCACHE=ON $ARGS"
+ARGS="-DWITH_PYTHON3=ON -DWITH_TESTS=ON -DWITH_CCACHE=ON $ARGS"
 NPROC=${NPROC:-$(nproc --ignore=2)}
 
 if [ -d "build" ]; then
