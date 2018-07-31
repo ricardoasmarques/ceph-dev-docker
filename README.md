@@ -99,9 +99,9 @@ Finally, to stop the container,
 
     # docker stop ceph-dev
 
-## Multiple docker container
+### Multiple docker containers
 
-If you want to run multiple docker container, you just need to modify the
+If you want to run multiple docker containers, you just need to modify the
 previous `docker run` command with a different local ceph directory and replace
 `ceph-dev` with a new value.
 
@@ -171,11 +171,33 @@ To run preconfigured external services, you can simply use `docker-compose`.
 > If you do not have `docker-compose` installed on your system, follow these
 [instructions](https://docs.docker.com/compose/install/).
 
+### Prerequisites
+
+#### Grafana
+
+To be able to start the Grafana container using `docker-compose` you will first
+need to create a data folder on your host system, where the configuration of
+Grafana will be stored.  This includes data source configurations as well as
+imported dashboards.
+
+	mkdir -p ~/tmp/grafana
+	chmod o+rw ~/tmp ~/tmp/grafana
+
+The path can be changed in the `docker-compose.yml` file under the `grafana`
+section.
+
+### Running services
+
 Running the following command will start all containers, one for each service.
 
     docker-compose up
 
 Note that this will *not* start `ceph-dev-docker`.
+
+You can also start a single service by providing the name of the services as
+they are configured in the `docker-compose.yml` file.
+
+	docker-compose up grafana
 
 Stopping these containers is as easy as running them:
 
@@ -191,9 +213,9 @@ After starting all containers, the following external services will be available
 
 | Tool           | URL                   | User                       | Pass  |
 | -------------- | --------------------- | -------------------------- | ----- |
-| Grafana        |                       |                            |       |
-| Prometheus     |                       |                            |       |
-| Node Exporter  |                       |                            |       |
+| Grafana        | http://localhost:3000 | admin                      | admin |
+| Prometheus     | http://localhost:9090 | -                          | -     |
+| Node Exporter  | http://localhost:9100 | -                          | -     |
 | Keycloak       | http://localhost:8080 | admin                      | admin |
 | LDAP           | ldap://localhost:2389 | cn=admin,dc=example,dc=org | admin |
 | PHP LDAP Admin | https://localhost:90  | cn=admin,dc=example,dc=org | admin |
@@ -202,9 +224,19 @@ After starting all containers, the following external services will be available
 > Please note that Grafana isn't configured automatically for you, so you
 will have to follow these
 [instructions](https://github.com/ceph/ceph/blob/master/doc/mgr/dashboard.rst#enabling-grafana-dashboards)
-to configure Grafana accordingly. The changes although, are persisted.
+to configure Grafana accordingly. The changes although, are stored and shared
+for newly created containers. Please also note that Grafana is, by default,
+configured to run behind a reverse proxy. This is required for the Ceph
+Dashboard to be able to embed the dashboards. This means that, although Grafana
+is listening on port 3000, you won't be able to open the Grafana in your
+browser and see Grafana working correctly on that port. Using the proxy
+implementation of the Ceph Dashboard on
+https://localhost:<port>/api/proxy/grafana is supposed to work as expected,
+though.
 
 ## Troubleshooting
+
+### Permission error when trying to access `/ceph`
 
 If you encounter a `permisson denied` when trying to access `/ceph` by, for instance, running `setup-ceph.sh` or simply by trying to list its contents (to verify that it has been mounted correctly), the chances are high that your host system uses SELinux. To circumvent that problem, you can simply disable SELinux by running:
 
