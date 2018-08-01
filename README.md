@@ -228,11 +228,11 @@ to configure Grafana accordingly. The changes although, are stored and shared
 for newly created containers. Please also note that Grafana is, by default,
 configured to run behind a reverse proxy. This is required for the Ceph
 Dashboard to be able to embed the dashboards. This means that, although Grafana
-is listening on port 3000, you won't be able to open the Grafana in your
-browser and see Grafana working correctly on that port. Using the proxy
-implementation of the Ceph Dashboard on
-https://localhost:<port>/api/proxy/grafana is supposed to work as expected,
-though.
+is listening on port 3000, you won't be able to open Grafana in your browser
+and see Grafana working correctly on that port. Using the proxy implementation
+of the Ceph Dashboard on `https://localhost:<port>/api/grafana/proxy/` is
+supposed to work as expected, though. Please pay attention to the trailing
+slash at the end of the URL. It is required and it won't work without it.
 
 ## Troubleshooting
 
