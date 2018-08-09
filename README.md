@@ -48,8 +48,9 @@ Now start up the container, by mounting the local git clone directory as
 `/ceph`:
 
     # docker run -itd \
-      -v $PWD:/ceph \
-      -v ~/.ccache:/root/.ccache \
+      -v <pathToCephRepo>:/ceph \
+      -v $PWD/scripts:/scripts \
+      -v <pathToCCacheDir>:/root/.ccache \
       --net=host \
       --name=ceph-dev \
       --hostname=ceph-dev \
@@ -59,7 +60,7 @@ Now start up the container, by mounting the local git clone directory as
 
 Lets walk through some of the flags from the above command:
 - `-d`: runs the container shell in detach mode
- - `~/.ccache`: the directory where ccache will store its data
+ - `<pathToCCacheDir>`: the directory where ccache will store its data
  - `--name`: custom name for the container, this can be used for managing
     the container
  - `--hostname`: custom hostname for the docker container, it helps to
@@ -112,8 +113,9 @@ previous `docker run` command with a different local ceph directory and replace
 For example:
 
     # docker run -itd \
-      -v $PWD:/ceph \
-      -v ~/.ccache:/root/.ccache \
+      -v <pathToCephRepo>:/ceph \
+      -v $PWD/scripts:/scripts \
+      -v <pathToCCacheDir>:/root/.ccache \
       --net=host \
       --name=new-ceph-container \
       --hostname=new-ceph-container \
