@@ -71,10 +71,10 @@ Now, anytime you want to access the container shell you just have to run
 
     # docker attach ceph-dev
 
-Inside the container, you can now call `setup-ceph`, which will install all the
+Inside the container, you can now call `setup-ceph.sh`, which will install all the
 required build dependencies and then build Ceph from source.
 
-    (docker)# setup-ceph
+    (docker)# setup-ceph.sh
 
 ### Docker container lifecycle
 
@@ -125,14 +125,15 @@ Now if you want to access this container just run,
 
 To start up the compiled Ceph cluster, you can use the `vstart.sh` script, which
 spawns up an entire cluster (MONs, OSDs, Mgr) in your development environment or
-you can use the `ceph-start` script available in this docker image.
+you can use the `start-ceph.sh` script available in this docker image.
+
 See the
 [documentation](http://docs.ceph.com/docs/master/dev/dev_cluster_deployement/)
 and the output of `vstart.sh --help` for details.
 
 To start an environment from scratch with debugging enabled, use the following command:
 
-    (docker)# start-ceph
+    (docker)# start-ceph.sh
 
 **Note:** This script uses the `vstart` `-d` option that enables debug output. Keep a close eye on the growth
 of the log files created in `build/out`, as they can grow very quickly (several
@@ -145,7 +146,7 @@ GB within a few hours).
 
 ### Stop Ceph development environment
 
-    (docker)# stop-ceph
+    (docker)# stop-ceph.sh
 
 ## Working on ceph dashboard
 
