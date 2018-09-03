@@ -71,10 +71,10 @@ Now, anytime you want to access the container shell you just have to run
 
     # docker attach ceph-dev
 
-Inside the container, you can now call `setup-ceph`, which will install all the
-required build dependencies and then build Ceph from source.
+Inside the container, you can now call `setup-ceph.sh`, which will install all
+the required build dependencies and then build Ceph from source.
 
-    (docker)# setup-ceph
+    (docker)# setup-ceph.sh
 
 ### Docker container lifecycle
 
@@ -125,18 +125,20 @@ Now if you want to access this container just run,
 
 To start up the compiled Ceph cluster, you can use the `vstart.sh` script, which
 spawns up an entire cluster (MONs, OSDs, Mgr) in your development environment or
-you can use the `ceph-start` script available in this docker image.
+you can use the `start-ceph.sh` script available in this docker image.
+
 See the
 [documentation](http://docs.ceph.com/docs/master/dev/dev_cluster_deployement/)
 and the output of `vstart.sh --help` for details.
 
-To start an environment from scratch with debugging enabled, use the following command:
+To start an environment from scratch with debugging enabled, use the following
+command:
 
-    (docker)# start-ceph
+    (docker)# start-ceph.sh
 
-**Note:** This script uses the `vstart` `-d` option that enables debug output. Keep a close eye on the growth
-of the log files created in `build/out`, as they can grow very quickly (several
-GB within a few hours).
+**Note:** This script uses the `vstart` `-d` option that enables debug output.
+Keep a close eye on the growth of the log files created in `build/out`, as they
+can grow very quickly (several GB within a few hours).
 
 ### Test Ceph Development Environment
 
@@ -145,7 +147,7 @@ GB within a few hours).
 
 ### Stop Ceph development environment
 
-    (docker)# stop-ceph
+    (docker)# stop-ceph.sh
 
 ## Working on ceph dashboard
 
@@ -221,25 +223,31 @@ After starting all containers, the following external services will be available
 | PHP LDAP Admin | https://localhost:90  | cn=admin,dc=example,dc=org | admin |
 | Shibboleth     | http://localhost:9080/Shibboleth.sso/Login | admin     | admin |
 
-> Please note that Grafana isn't configured automatically for you, so you
-will have to follow these
+> Please note that Grafana isn't configured automatically for you, so you will
+have to follow these
 [instructions](https://github.com/ceph/ceph/blob/master/doc/mgr/dashboard.rst#enabling-grafana-dashboards)
 to configure Grafana accordingly. The changes although, are stored and shared
 for newly created containers. Please also note that Grafana is, by default,
 configured to run behind a reverse proxy. This is required for the Ceph
 Dashboard to be able to embed the dashboards. This means that, although Grafana
-is listening on port 3000, you won't be able to open Grafana in your browser
-and see Grafana working correctly on that port. Using the proxy implementation
-of the Ceph Dashboard on `https://localhost:<port>/api/grafana/proxy/` is
-supposed to work as expected, though. Please pay attention to the trailing
-slash at the end of the URL. It is required and it won't work without it.
+is listening on port 3000, you won't be able to open Grafana in your browser and
+see Grafana working correctly on that port. Using the proxy implementation of
+the Ceph Dashboard on `https://localhost:<port>/api/grafana/proxy/` is supposed
+to work as expected, though. Please pay attention to the trailing slash at the
+end of the URL. It is required and it won't work without it.
 
 ## Troubleshooting
 
 ### Permission error when trying to access `/ceph`
 
-If you encounter a `permisson denied` when trying to access `/ceph` by, for instance, running `setup-ceph.sh` or simply by trying to list its contents (to verify that it has been mounted correctly), the chances are high that your host system uses SELinux. To circumvent that problem, you can simply disable SELinux by running:
+If you encounter a `permisson denied` when trying to access `/ceph` by, for
+instance, running `setup-ceph.sh` or simply by trying to list its contents (to
+verify that it has been mounted correctly), the chances are high that your host
+system uses SELinux. To circumvent that problem, you can simply disable SELinux
+by running:
 
     sudo setenforce permissive
 
-This puts SELinux in permissive mode, where the rules are still evaluated but not enforced, they are only logged. This basically *disables* SELinux, making the host system more vulnerable for security flaws.
+This puts SELinux in permissive mode, where the rules are still evaluated but
+not enforced, they are only logged. This basically *disables* SELinux, making
+the host system more vulnerable for security flaws.
