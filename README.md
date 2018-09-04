@@ -19,7 +19,7 @@ To remove this requirement you can join the `docker` user group.
 
 From inside this project's git repo, run the following command:
 
-    # docker build -t ceph-dev-docker .
+    # docker build --network=host -t ceph-dev-docker .
 
 You should now have two additional images in your local Docker repository, named
 `ceph-dev-docker` and `docker.io/opensuse`:
