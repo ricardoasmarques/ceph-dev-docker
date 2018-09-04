@@ -8,8 +8,10 @@ RUN zypper -n install \
         python lttng-ust-devel babeltrace-devel \
         librados2 python2-pylint python3-pylint \
         bash vim tmux git aaa_base ccache wget jq google-opensans-fonts \
-        python-devel python-Cython python-PrettyTable psmisc \
-        python2-CherryPy python2-pecan python2-Jinja2 python2-pyOpenSSL
+        python-devel python-Cython python-PrettyTable python3-PrettyTable \
+        psmisc python2-CherryPy python3-CherryPy python2-pecan \
+        python3-pecan python2-Jinja2 python3-Jinja2 python2-pyOpenSSL \
+        python3-pyOpenSSL
 
 RUN wget https://dl.google.com/linux/linux_signing_key.pub
 RUN rpm --import linux_signing_key.pub
