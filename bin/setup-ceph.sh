@@ -19,3 +19,8 @@ else
 fi
 
 ccache make -j$NPROC
+
+# SSO dependencies
+zypper -n install libxmlsec1-1 libxmlsec1-nss1 libxmlsec1-openssl1 xmlsec1-devel xmlsec1-openssl-devel
+pip install python3-saml
+pip2 install python-saml
