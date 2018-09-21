@@ -175,19 +175,6 @@ To run preconfigured external services, you can simply use `docker-compose`.
 
 ### Prerequisites
 
-#### Grafana
-
-To be able to start the Grafana container using `docker-compose` you will first
-need to create a data folder on your host system, where the configuration of
-Grafana will be stored.  This includes data source configurations as well as
-imported dashboards.
-
-	mkdir -p ~/tmp/grafana
-	chmod o+rw ~/tmp ~/tmp/grafana
-
-The path can be changed in the `docker-compose.yml` file under the `grafana`
-section.
-
 ### Running services
 
 Running the following command will start all containers, one for each service.

@@ -24,7 +24,6 @@ services:
     container_name: 'grafana'
     network_mode: 'host'
     volumes:
-      - '~/tmp/grafana:/var/lib/grafana'  # You may want to adapt this!
       - './grafana.ini:/etc/grafana/grafana.ini:ro'
 
   keycloak:
