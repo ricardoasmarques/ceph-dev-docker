@@ -47,7 +47,7 @@ RUN sed -i -e 's!localhost/!localhost:9443/!g' /opt/shibboleth-idp/metadata/idp-
 RUN sed -i -e 's/#idp.encryption.optional = false/idp.encryption.optional = true/g' /opt/shibboleth-idp/conf/idp.properties
 ADD files/metadata-providers.xml /opt/shibboleth-idp/conf/
 
-RUN sed -i -e 's!<PolicyRequirementRule xsi:type="Requester" value="https://sp.example.org" />!<PolicyRequirementRule xsi:type="Requester" value="https://cephdashboard.local/auth/saml/metadata" />!g' /opt/shibboleth-idp/conf/attribute-filter.xml
+RUN sed -i -e 's!<PolicyRequirementRule xsi:type="Requester" value="https://sp.example.org" />!<PolicyRequirementRule xsi:type="Requester" value="https://cephdashboard.local/auth/saml2/metadata" />!g' /opt/shibboleth-idp/conf/attribute-filter.xml
 RUN sed -i -e 's/name="urn:oid:0.9.2342.19200300.100.1.1"/name="uid"/g' /opt/shibboleth-idp/conf/attribute-resolver.xml
 
 ADD files/ldap.properties /opt/shibboleth-idp/conf/
