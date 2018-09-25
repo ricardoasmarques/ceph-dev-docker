@@ -14,4 +14,8 @@
                       xsi:type="FilesystemMetadataProvider"
                       metadataFile="/opt/shibboleth-idp/metadata/sp-metadata.xml"/>
 
+    <MetadataProvider id="MyLocalMetadata"
+                      xsi:type="FilesystemMetadataProvider"
+                      metadataFile="/opt/shibboleth-idp/metadata/cephdashboard-metadata.xml"/>
+
 </MetadataProvider>
