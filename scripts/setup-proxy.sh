@@ -2,8 +2,7 @@
 
 set -e
 
-cd /ceph/build
-url=`./bin/ceph mgr services | jq .dashboard`
+url=`ceph mgr services | jq .dashboard`
 
-cd /ceph/src/pybind/mgr/dashboard/frontend
+cdsdf
 jq '.["/api/"].target'=$url proxy.conf.json.sample | jq '.["/ui-api/"].target'=$url > proxy.conf.json

@@ -1,0 +1,39 @@
+export PATH=/scripts:/root/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+export PS1='\[\033[1;36m\]🐳 \h \[\033[1;34m\]\w\[\033[0;35m\] \[\033[1;36m\]# \[\033[0m\]'
+
+alias ls='ls --color=auto'
+alias o='grep --color=auto'
+
+export SDP='/ceph/src/pybind/mgr/dashboard'
+
+function cdb {
+  cd /ceph/build
+}
+export -f cdb
+
+function cdsd {
+  cd $SDP
+}
+export -f cdsd
+
+function cdsdf {
+  cd $SDP/frontend
+}
+export -f cdsdf
+
+function ceph {
+  cdb
+  bin/ceph $@
+  cd -
+}
+export -f ceph
+
+function clear-log-and-pyc {
+  find /ceph/build/out/ -name "mgr.*.log" -type f -delete
+  find /ceph/src/pybind/mgr/dashboard -name \*.pyc -delete
+}
+export -f clear-log-and-pyc
+
+
+source /scripts/dockerBinds.sh

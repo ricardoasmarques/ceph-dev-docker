@@ -1,6 +1,7 @@
 FROM opensuse:tumbleweed
 LABEL maintainer="rimarques@suse.com"
 
+# Install all zypper dependencies
 RUN zypper --gpg-auto-import-keys ref
 RUN zypper -n dup
 RUN zypper -n install \
@@ -13,16 +14,17 @@ RUN zypper -n install \
         python3-CherryPy python2-pecan python3-pecan python2-Jinja2 \
         python3-Jinja2 python2-pyOpenSSL python3-pyOpenSSL \
         python3-Werkzeug python3-bcrypt python3-Routes python3-requests \
-        gcc7 gcc7-c++ libstdc++6-devel-gcc7
+        gcc7 gcc7-c++ libstdc++6-devel-gcc7 libxmlsec1-1 \
+        libxmlsec1-nss1 libxmlsec1-openssl1 xmlsec1-devel \
+        xmlsec1-openssl-devel
 
+# Install google chrome
 RUN wget https://dl.google.com/linux/linux_signing_key.pub
 RUN rpm --import linux_signing_key.pub
 RUN zypper ar http://dl.google.com/linux/chrome/rpm/stable/x86_64 google
 RUN zypper -n in google-chrome-stable
-
 ENV CHROME_BIN /usr/bin/google-chrome
 
-ADD bin/ /root/bin/
 ADD bash.bashrc /etc/bash.bashrc
 
 ENV CEPH_ROOT /ceph

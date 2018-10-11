@@ -2,9 +2,24 @@
 
 set -e
 
+# Make sure all packages are up to date
+zypper ref
+zypper update -y
+
+# Install all requirements to run tests
+cdsd
+pip2 install --ignore-installed -r requirements.txt
+pip3 install --ignore-installed -r requirements.txt
+
 cd /ceph
 find . -name \*.pyc -delete
 ./install-deps.sh
+
+# SSO dependencies
+# (install-deps.sh has to be run before)
+pip3 install python3-saml
+pip2 install python-saml
+
 
 ARGS="-DWITH_PYTHON3=ON -DWITH_PYTHON2=OFF -DMGR_PYTHON_VERSION=3 -DWITH_TESTS=ON -DWITH_CCACHE=ON $ARGS"
 NPROC=${NPROC:-$(nproc --ignore=2)}
@@ -18,7 +33,8 @@ if [ "$MIMIC" == "true" ]; then
 fi
 
 if [ -d "build" ]; then
-    git submodule update --init --recursive
+    git submodule update -f --recursive --remote
+    git submodule update -f --init --recursive
     cd build
     cmake -DBOOST_J=$NPROC $ARGS ..
 else
@@ -27,8 +43,3 @@ else
 fi
 
 ccache make -j$NPROC
-
-# SSO dependencies
-zypper -n install libxmlsec1-1 libxmlsec1-nss1 libxmlsec1-openssl1 xmlsec1-devel xmlsec1-openssl-devel
-pip install python3-saml
-pip2 install python-saml
