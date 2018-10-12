@@ -76,6 +76,10 @@ the required build dependencies and then build Ceph from source.
 
     (docker)# setup-ceph.sh
 
+Or, if you are working on Mimic
+
+    (docker)# MIMIC=true setup-ceph.sh
+
 ### Docker container lifecycle
 
 To start a container run,
