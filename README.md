@@ -282,6 +282,55 @@ the Ceph Dashboard on `https://localhost:<port>/api/grafana/proxy/` is supposed
 to work as expected, though. Please pay attention to the trailing slash at the
 end of the URL. It is required and it won't work without it.
 
+### NFS-Ganesha
+
+We provide a container that runs NFS-Ganesha server. This server exports two
+mount points backed by CephFS and RadosGW, and connects to the vstart cluster
+initiated by the main ceph-dev-docker container.
+
+The NFS-Ganesha container cannot be started with docker-compose and must be
+build and run manually. Please follow the instructions below:
+
+#### Build NFS-Ganesha Container
+
+From inside this project's git repo, run the following command:
+
+```
+$ cd ganesha
+$ docker build -t nfs-ganesha-ceph .
+```
+
+#### Run NFS-Ganesha Container
+
+> Important Note: if you already have an NFS server running in your host,
+you must stop it before running the nfs-ganesha container.
+E.g., `systemctl stop nfs-server`.
+
+From the ceph local git repo directory, run:
+
+```
+$ docker run -ti --init --rm -v $PWD:/ceph -p 2049:2049 --cap-add SYS_ADMIN \
+             --cap-add DAC_READ_SEARCH  nfs-ganesha-ceph
+```
+
+This will start NFS-Ganesha server and create an initial configuration.
+The ganesha configuration will be stored in the Ceph cluster as a rados object
+called "ganesha.conf" in a pool called "ganesha".
+This configuration will not be overwritten if already exists, therefore you
+can restart the container several times and keep the same configuration.
+
+When the container starts it will print some useful information. For instance,
+it will show the IP address of the server, and also the commands you can use
+to mount the export backed by the CephFS backend, or the export backed by the
+RadosGW backend.
+
+You can also check the list of exports available by the nfs-ganesha server
+with the following command:
+
+```
+$ showmount -e $SERVER_IP_ADDR
+```
+
 ## Troubleshooting
 
 ### Permission error when trying to access `/ceph`
