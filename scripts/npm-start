@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+set-proxy
+
+cd /ceph/src/pybind/mgr/dashboard
+source ../node-env/bin/activate
+npm i
+
+npm start

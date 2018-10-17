@@ -7,7 +7,7 @@ zypper ref
 zypper update -y
 
 # Install all requirements to run tests
-cdsd
+cd /ceph/src/pybind/mgr/dashboard
 pip2 install --ignore-installed -r requirements.txt
 pip3 install --ignore-installed -r requirements.txt
 

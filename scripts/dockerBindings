@@ -1,29 +1,41 @@
 # Source this to have some usefull shortcuts
 
+export PATH=/scripts:$PATH:/ceph/build/bin
+
+function cdb {
+  cd /ceph/build
+}
+
+function cdd {
+  cd /ceph/src/pybind/mgr/dashboard
+}
+
+function cdf {
+  cd /ceph/src/pybind/mgr/dashboard/frontend
+}
+
 function ceph-reset {
-    stop-ceph.sh
-    start-ceph.sh
+  ceph-stop
+  ceph-start
 }
 
 function cd-lint-python {
-    cdsd
+    cdd
     tox -e lint
-    cd -
 }
 
 function cd-unit-tests {
-    cdsd
+    cdd
     tox
-    cd -
 }
 
 function cd-traceback {
-    reload-dashboard.sh
+    reload-dashboard
     traceback-mgr
 }
 
 function cd-debug {
-    reload-dashboard.sh
+    reload-dashboard
     tail -f /ceph/build/out/mgr.x.log | grep --line-buffered "\[dashboard\] [^N]"
 }
 

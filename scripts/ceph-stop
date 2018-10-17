@@ -2,5 +2,5 @@
 
 set -e
 
-cdb
+cd /ceph/build
 ../src/stop.sh

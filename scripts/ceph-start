@@ -2,8 +2,7 @@
 
 set -e
 
-cdb
-
+cd /ceph/build
 clear-log-and-pyc
 
 RGW=1 ../src/vstart.sh -d -n -x
@@ -25,4 +24,4 @@ ceph dashboard set-rgw-api-secret-key `./bin/radosgw-admin user info --uid=dev |
 ceph osd pool create rbdPool 16
 ceph osd pool application enable rbdPool rbd
 
-reload-dashboard.sh
+reload-dashboard

@@ -2,8 +2,8 @@
 
 set -e
 
-cdsdf
-source $SDP/node-env/bin/activate
+cd /ceph/src/pybind/mgr/dashboard/frontend
+source ../node-env/bin/activate
 npm i
 
 npm run build

@@ -16,7 +16,7 @@ RUN zypper -n install \
         python3-Werkzeug python3-bcrypt python3-Routes python3-requests \
         gcc7 gcc7-c++ libstdc++6-devel-gcc7 libxmlsec1-1 \
         libxmlsec1-nss1 libxmlsec1-openssl1 xmlsec1-devel \
-        xmlsec1-openssl-devel
+        xmlsec1-openssl-devel zsh hostname
 
 # Install google chrome
 RUN wget https://dl.google.com/linux/linux_signing_key.pub
@@ -25,7 +25,10 @@ RUN zypper ar http://dl.google.com/linux/chrome/rpm/stable/x86_64 google
 RUN zypper -n in google-chrome-stable
 ENV CHROME_BIN /usr/bin/google-chrome
 
-ADD bash.bashrc /etc/bash.bashrc
+#Shells
+RUN wget -O /root/.zshrc https://git.grml.org/f/grml-etc-core/etc/zsh/zshrc
+RUN echo "source /scripts/zshrc" >> /root/.zshrc
+RUN echo "source /scripts/bashrc" > /etc/bash.bashrc
 
 ENV CEPH_ROOT /ceph
 ENV BUILD_DIR /ceph/build

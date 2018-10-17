@@ -9,8 +9,8 @@ clear-log-and-pyc
 # you don't have to rerun 'npm start'
 ceph config set mgr mgr/dashboard/x/server_port 8383
 
-sleep 5
+sleep 3
 ceph mgr module enable dashboard
 
-sleep 5
-setup-proxy.sh
+sleep 3
+set-proxy
