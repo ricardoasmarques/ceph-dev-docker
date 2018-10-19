@@ -60,3 +60,46 @@ services:
       - "9443:9443"
     links:
       - openldap
+
+  iscsi1:
+    build:
+      context: ./iscsi
+      dockerfile: Dockerfile
+      #ports:
+      #- "3260:3260"
+        #- "5000:5000"
+        #network_mode: 'host'
+    hostname: "ceph-gw-1"
+    extra_hosts:
+      ceph-gw-2: 172.18.0.2
+    cap_add:
+      - 'ALL'
+    privileged: true
+    links:
+      - iscsi2
+    volumes:
+      - '../ceph:/ceph'
+      - '/dev:/dev'
+      - '/run/systemd/journal:/run/systemd/journal'
+      - '/lib/modules:/lib/modules'
+
+  iscsi2:
+    build:
+      context: ./iscsi
+      dockerfile: Dockerfile
+    #ports:
+      #- "3260:3260"
+      #- "5000:5000"
+    #network_mode: 'host'
+    hostname: "ceph-gw-2"
+    extra_hosts:
+      ceph-gw-1: 172.18.0.3
+    cap_add:
+      - 'ALL'
+    privileged: true
+    volumes:
+      - '../ceph:/ceph'
+      - '/dev:/dev'
+      - '/run/systemd/journal:/run/systemd/journal'
+      - '/lib/modules:/lib/modules'
+
