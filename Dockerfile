@@ -1,6 +1,8 @@
 FROM opensuse:tumbleweed
 LABEL maintainer="rimarques@suse.com"
 
+ENV CEPH_PORT=8080
+
 RUN zypper --gpg-auto-import-keys ref
 RUN zypper -n dup
 RUN zypper -n install \
