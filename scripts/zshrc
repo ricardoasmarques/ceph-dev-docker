@@ -1,0 +1,4 @@
+HISTFILE=/scripts/.zsh_history
+export CEPH_ROOT=/ceph
+export CEPH_BUILD_DIR=/ceph/build
+source /scripts/dockerBindings
