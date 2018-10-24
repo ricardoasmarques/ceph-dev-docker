@@ -9,8 +9,10 @@ clear-log-and-pyc
 # you don't have to rerun 'npm start'
 ceph config set mgr mgr/dashboard/x/server_port 8383
 
-sleep 3
-ceph mgr module enable dashboard
+sleep 5
+ceph mgr module enable dashboard --force
 
-sleep 3
+# Only the first time you have to wait 10s if it's created it won't change
+# But it will prevent to target 'null'
+sleep 10
 set-proxy
