@@ -2,5 +2,5 @@
 
 set -e
 
-find /ceph/build/out/ -name "mgr.*.log" -type f -delete
+rm -rf /ceph/build/out/*
 find /ceph/src/pybind/mgr/dashboard -name \*.pyc -delete
