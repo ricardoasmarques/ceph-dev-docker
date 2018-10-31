@@ -13,7 +13,7 @@ RUN zypper -n install \
         python3-CherryPy python2-pecan python3-pecan python2-Jinja2 \
         python3-Jinja2 python2-pyOpenSSL python3-pyOpenSSL \
         python3-Werkzeug python3-bcrypt python3-Routes python3-requests \
-        gcc7 gcc7-c++ libstdc++6-devel-gcc7
+        gcc7 gcc7-c++ libstdc++6-devel-gcc7 python2-PyJWT python3-PyJWT
 
 RUN wget https://dl.google.com/linux/linux_signing_key.pub
 RUN rpm --import linux_signing_key.pub
