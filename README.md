@@ -271,7 +271,7 @@ Setup `shibboleth` IdP:
 
 > Please note that Grafana isn't configured automatically for you, so you will
 have to follow these
-[instructions](https://github.com/ceph/ceph/blob/master/doc/mgr/dashboard.rst#enabling-grafana-dashboards)
+[instructions](https://github.com/ceph/ceph/blob/master/doc/mgr/dashboard.rst#enabling-the-embedding-of-grafana-dashboards)
 to configure Grafana accordingly. The changes although, are stored and shared
 for newly created containers. Please also note that Grafana is, by default,
 configured to run behind a reverse proxy. This is required for the Ceph
