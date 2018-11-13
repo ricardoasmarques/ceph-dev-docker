@@ -21,6 +21,8 @@ services:
 
   grafana:
     image: 'grafana/grafana'
+    environment:
+      GF_INSTALL_PLUGINS: vonage-status-panel,grafana-piechart-panel
     container_name: 'grafana'
     network_mode: 'host'
     volumes:
