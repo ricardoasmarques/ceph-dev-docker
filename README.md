@@ -66,6 +66,15 @@ Lets walk through some of the flags from the above command:
     distinguish one container from another
  - `--add-host`: fixes the problem with resolving hostname inside docker
 
+Extra flags:
+
+- `--env CEPH_PORT=<CEPH_PORT>`: This port will be used by `vstart.sh` to
+determine each service's port.
+All services will have a port with an increment of 1000 relative to the previous
+one; and since the dashboard is currently the first one its port will be
+<CEPH_PORT>+1000.
+Make sure the <CEPH_PORT> you pick won't cause conflicts in your environment.
+
 After running this command you will have a running docker container.
 Now, anytime you want to access the container shell you just have to run
 
