@@ -1,0 +1,10 @@
+route:
+  receiver: 'ceph-dashboard'
+  group_wait: 1m
+  group_interval: 1m
+  repeat_interval: 1m
+
+receivers:
+  - name: 'ceph-dashboard'
+    webhook_configs:
+    - url: 'http://localhost:4200/api/prometheus_receiver'

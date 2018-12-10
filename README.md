@@ -208,11 +208,44 @@ After starting all containers, the following external services will be available
 | -------------- | --------------------- | -------------------------- | ----- |
 | Grafana        | http://localhost:3000 | admin                      | admin |
 | Prometheus     | http://localhost:9090 | -                          | -     |
+| Alertmanager   | http://localhost:9093 | -                          | -     |
 | Node Exporter  | http://localhost:9100 | -                          | -     |
 | Keycloak       | http://localhost:8080 | admin                      | admin |
 | LDAP           | ldap://localhost:2389 | cn=admin,dc=example,dc=org | admin |
 | PHP LDAP Admin | https://localhost:90  | cn=admin,dc=example,dc=org | admin |
 | Shibboleth     | http://localhost:9080/Shibboleth.sso/Login | admin     | admin |
+
+### Using Prometheus
+
+All ports in use can be found in `prometheus/prometheus.yml`.
+
+To start Prometheus, Grafana and Node exporter, run:
+
+    docker-compose up alertmanager grafana node-exporter prometheus
+
+In order to connect with prometheus to your running docker instance, enable prometheus in it with:
+
+    ceph mgr module enable prometheus
+
+Now the following services should be found:
+
+* [Ceph metrics](http://localhost:9100/metrics)
+* [Prometheus](http://localhost:9090)
+* [Alertmanager](http://localhost:9093)
+* [Grafana](http://localhost:3000)
+
+In order to enable connections from the dashboard to the Alertmanager API run:
+
+    ceph dashboard set-alertmanager-api-host 'http://localhost:9093'
+
+After you have connected the API to the dashboard reload the page.
+After some minutes you should see a new tab inside the notification popover.
+The monitoring tab should have at least one active alert named 'load0'.
+
+There are 7 alerts configured, you can find them in 'prometheus/alert.rules'.
+The alerts have nothing to do with your cluster state (ATM), just with your system load.
+'load0' fires if your system load is greater than zero, this means it's always on.
+
 
 ### Configure SSO
 
