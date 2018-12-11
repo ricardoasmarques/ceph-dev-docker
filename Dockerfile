@@ -4,8 +4,6 @@ LABEL maintainer="rimarques@suse.com"
 RUN zypper -n ar https://download.opensuse.org/repositories/filesystems:/ceph:/nautilus/openSUSE_Tumbleweed/filesystems:ceph:nautilus.repo
 RUN zypper --gpg-auto-import-keys ref
 RUN zypper -n dup
-RUN zypper -n install --oldpackage python3-Cython-0.28.4-1.1.x86_64 \
-                                   python2-Cython-0.28.4-1.1.x86_64
 RUN zypper -n install \
         iproute2 net-tools-deprecated python2-pip python3-pip \
         python lttng-ust-devel babeltrace-devel \
@@ -16,7 +14,10 @@ RUN zypper -n install \
         python3-CherryPy python2-pecan python3-pecan python2-Jinja2 \
         python3-Jinja2 python2-pyOpenSSL python3-pyOpenSSL \
         python3-Werkzeug python3-bcrypt python3-Routes python3-requests \
-        gcc7 gcc7-c++ libstdc++6-devel-gcc7 python2-PyJWT python3-PyJWT
+        gcc7 gcc7-c++ libstdc++6-devel-gcc7 python2-PyJWT python3-PyJWT \
+        python2-devel python3-devel
+
+RUN zypper -n install --repo "Ceph Nautilus (openSUSE_Tumbleweed)" python3-Cython python2-Cython
 
 RUN wget https://dl.google.com/linux/linux_signing_key.pub
 RUN rpm --import linux_signing_key.pub
