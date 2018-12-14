@@ -15,8 +15,18 @@ services:
   prometheus:
     image: 'quay.io/prometheus/prometheus'
     volumes:
-      - './prometheus.yml:/etc/prometheus/prometheus.yml:ro'
+      - './prometheus:/etc/prometheus'
     container_name: 'prometheus'
+    network_mode: 'host'
+
+  alertmanager:
+    image: 'quay.io/prometheus/alertmanager'
+    volumes:
+      - './alertmanager/:/etc/alertmanager/'
+    container_name: 'alertmanager'
+    command:
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
     network_mode: 'host'
 
   grafana:

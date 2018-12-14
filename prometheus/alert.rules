@@ -1,0 +1,66 @@
+groups:
+- name: test
+  rules:
+
+  - alert: load_0
+    expr: node_load1 > 0
+    for: 10s
+    labels:
+      severity: page
+    annotations:
+      summary: "Instance {{ $labels.instance }} load is over 0!"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} load is over 0!"
+
+  - alert: load_1
+    expr: node_load1 > 1 and node_load1 > 3
+    for: 30s
+    labels:
+      severity: page
+    annotations:
+      summary: "Instance {{ $labels.instance }} with load between 1 and 3"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} with load between 1 and 3."
+
+  - alert: load_2
+    expr: node_load1 > 2 and node_load1 > 4
+    for: 25s
+    labels:
+      severity: page
+    annotations:
+      summary: "Instance {{ $labels.instance }} with load between 2 and 4"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} with load between 2 and 4."
+
+  - alert: load_3
+    expr: node_load1 > 3 and node_load1 > 5
+    for: 20s
+    labels:
+      severity: page
+    annotations:
+      summary: "Instance {{ $labels.instance }} with load between 3 and 5"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} with load between 3 and 5."
+
+  - alert: load_4
+    expr: node_load1 > 4 and node_load1 > 6
+    for: 15s
+    labels:
+      severity: page
+    annotations:
+      summary: "Instance {{ $labels.instance }} with load between 4 and 6"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} with load between 4 and 6."
+
+  - alert: load_5
+    expr: node_load1 > 5 and node_load1 > 7
+    for: 10s
+    labels:
+      severity: page
+    annotations:
+      summary: "Instance {{ $labels.instance }} with load between 5 and 7"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} with load between 5 and 7."
+
+  - alert: load_6
+    expr: node_load1 > 6
+    for: 5s
+    labels:
+      severity: page
+    annotations:
+      summary: "Instance {{ $labels.instance }} with load over 6 for 10s."
+      description: "{{ $labels.instance }} of job {{ $labels.job }} with load over 6 for 10s."
