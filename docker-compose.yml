@@ -3,7 +3,7 @@ version: '3'
 services:
   node-exporter:
     user: 'root'
-    image: 'quay.io/prometheus/node-exporter'
+    image: 'prom/node-exporter'
     volumes:
       - '/proc:/host/proc:ro'
       - '/sys:/host/sys:ro'
@@ -13,14 +13,15 @@ services:
               '--path.sysfs', '/host/sys',
               '--collector.filesystem.ignored-mount-points', '^/(sys|proc|dev|host|etc)($$|/)']
   prometheus:
-    image: 'quay.io/prometheus/prometheus'
+    image: 'prom/prometheus'
     volumes:
-      - './prometheus:/etc/prometheus'
+      - './prometheus/alert.rules:/etc/prometheus/alert.rules'
+      - './prometheus/prometheus.yml:/etc/prometheus/prometheus.yml'
     container_name: 'prometheus'
     network_mode: 'host'
 
   alertmanager:
-    image: 'quay.io/prometheus/alertmanager'
+    image: 'prom/alertmanager'
     volumes:
       - './alertmanager/:/etc/alertmanager/'
     container_name: 'alertmanager'
