@@ -32,12 +32,15 @@ services:
 
   grafana:
     image: 'grafana/grafana'
+    volumes:
+      - './grafana/ceph-dashboards.yaml:/etc/grafana/provisioning/dashboards/ceph-dashboards.yaml:ro'
+      - './grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml:ro'
+      - './grafana/grafana.ini:/etc/grafana/grafana.ini:ro'
+      - '../ceph/monitoring/grafana/dashboards:/var/lib/grafana/dashboards/:ro'
     environment:
       GF_INSTALL_PLUGINS: vonage-status-panel,grafana-piechart-panel
     container_name: 'grafana'
     network_mode: 'host'
-    volumes:
-      - './grafana.ini:/etc/grafana/grafana.ini:ro'
 
   keycloak:
     image: jboss/keycloak
