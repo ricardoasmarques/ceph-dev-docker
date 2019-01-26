@@ -186,9 +186,7 @@ To run preconfigured external services, you can simply use `docker-compose`.
 > If you do not have `docker-compose` installed on your system, follow these
 [instructions](https://docs.docker.com/compose/install/).
 
-### Prerequisites
-
-### Running services
+### Starting services
 
 Running the following command will start all containers, one for each service.
 
@@ -311,18 +309,17 @@ Setup `shibboleth` IdP:
 
 ### Grafana
 
-> Please note that Grafana isn't configured automatically for you, so you will
-have to follow these
-[instructions](https://github.com/ceph/ceph/blob/master/doc/mgr/dashboard.rst#enabling-the-embedding-of-grafana-dashboards)
-to configure Grafana accordingly. The changes although, are stored and shared
-for newly created containers. Please also note that Grafana is, by default,
-configured to run behind a reverse proxy. This is required for the Ceph
-Dashboard to be able to embed the dashboards. This means that, although Grafana
-is listening on port 3000, you won't be able to open Grafana in your browser and
-see Grafana working correctly on that port. Using the proxy implementation of
-the Ceph Dashboard on `https://localhost:<port>/api/grafana/proxy/` is supposed
-to work as expected, though. Please pay attention to the trailing slash at the
-end of the URL. It is required and it won't work without it.
+The Grafana container is pre-configured to access the Prometheus container as
+a data source. The Grafana dashboards are taken from the ceph git repository
+when creating the container (by assuming that the ceph git repo is located
+in the same directory as the ceph-dev-docker git repo). Grafana scans this
+directory for changes every 10 seconds.
+
+To configure the embedding of the Grafana dashboards into the Ceph Manager
+Dashboard, run the following command inside the ceph-dev container where Ceph
+is up and running::
+
+    (ceph-dev)# bin/ceph dashboard set-grafana-api-url http://localhost:3000
 
 ## Troubleshooting
 
