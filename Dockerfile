@@ -4,7 +4,7 @@ LABEL maintainer="rimarques@suse.com"
 RUN zypper --gpg-auto-import-keys ref
 RUN zypper -n dup
 RUN zypper -n install \
-        iproute2 net-tools-deprecated python2-pip python3-pip \
+        iproute2 net-tools-deprecated python2-pip python3-pip zsh \
         python lttng-ust-devel babeltrace-devel \
         python2-pylint python3-pylint \
         bash vim tmux git aaa_base ccache wget jq google-opensans-fonts \
@@ -22,12 +22,20 @@ RUN zypper -n in google-chrome-stable
 
 ENV CHROME_BIN /usr/bin/google-chrome
 
-ADD bin/ /root/bin/
-ADD bash.bashrc /etc/bash.bashrc
+#oh-my-zsh
+ENV ZSH_DISABLE_COMPFIX true
+RUN sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+# sym link for .zshrc
+RUN rm /root/.zshrc
+RUN ln -s /shared/zsh/.zshrc /root/.zshrc
+# sym link for dash.plugin.zsh
+RUN mkdir ~/.oh-my-zsh/custom/plugins/dash
+RUN ln -s /shared/zsh/dash.plugin.zsh ~/.oh-my-zsh/custom/plugins/dash/dash.plugin.zsh
 
 ENV CEPH_ROOT /ceph
 ENV BUILD_DIR /ceph/build
 
 VOLUME ["/ceph"]
+VOLUME ["/shared"]
 
-CMD /bin/bash
+CMD ["zsh"]
