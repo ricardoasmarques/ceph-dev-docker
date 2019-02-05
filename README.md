@@ -105,9 +105,21 @@ the required build dependencies and then build Ceph from source.
 
     (docker)# setup-ceph.sh
 
-Or, if you are working on Mimic
+This script reads the following env variables:
 
-    (docker)# MIMIC=true setup-ceph.sh
+    // Determines which gcc version should be used. If 'true' it will use gcc7,
+    // which is compatible with the mimic release
+    // default: false
+    MIMIC=true
+
+    // Forces the use of a specific python version.
+    // default: 3
+    WITH_PYTHON=2
+
+    // Forces a clean compilation of ceph. It will remove the build folder and
+    // node_modules and dist from the dashboard
+    // default: false
+    CLEAN=true
 
 ### Docker container lifecycle
 
