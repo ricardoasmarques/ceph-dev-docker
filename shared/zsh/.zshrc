@@ -70,7 +70,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-export SOURCE_DATE_EPOCH=0
+export SOURCE_DATE_EPOCH=946684800
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
