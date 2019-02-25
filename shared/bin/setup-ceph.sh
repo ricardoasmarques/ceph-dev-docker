@@ -8,7 +8,6 @@ cd /ceph
 find . -name \*.pyc -delete
 ./install-deps.sh
 
-export SOURCE_DATE_EPOCH=0
 ARGS="-DENABLE_GIT_VERSION=OFF -DWITH_TESTS=ON -DWITH_CCACHE=ON $ARGS"
 if [ "$WITH_PYTHON" == 3 ]; then
     ARGS="-DWITH_PYTHON3=ON -DWITH_PYTHON2=OFF -DMGR_PYTHON_VERSION=3 $ARGS"
