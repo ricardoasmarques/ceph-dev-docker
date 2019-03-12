@@ -21,6 +21,10 @@ RUN zypper -n install \
         python2-Routes python3-Routes \
         python2-Werkzeug python3-Werkzeug
 
+# temporary fix for error regarding version of tempora
+RUN pip2 install tempora==1.8 backports.functools_lru_cache
+RUN pip3 install tempora==1.8 backports.functools_lru_cache
+
 ADD /shared/docker/ /docker
 
 # Chrome
