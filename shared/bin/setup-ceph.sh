@@ -19,15 +19,15 @@ fi
 
 NPROC=${NPROC:-$(nproc --ignore=2)}
 
-if [ "$MIMIC" == "true" ]; then
-    rm /usr/bin/gcc
-    rm /usr/bin/g++
-
-    ln -s /usr/bin/gcc-7 /usr/bin/gcc
-    ln -s /usr/bin/g++-7 /usr/bin/g++
+if [ "$MIMIC" != "true" ]; then
+    # SSO dependencies
+    zypper -n install libxmlsec1-1 libxmlsec1-nss1 libxmlsec1-openssl1 xmlsec1-devel xmlsec1-openssl-devel
+    pip install python3-saml
+    pip2 install python-saml
 fi
 
 if [ "$CLEAN" == "true" ]; then
+    echo "CLEAN INSTALL"
     rm -rf /ceph/build/
     rm -rf /ceph/src/pybind/mgr/dashboard/frontend/node_modules/
     rm -rf /ceph/src/pybind/mgr/dashboard/frontend/dist/
@@ -44,7 +44,3 @@ fi
 
 ccache make -j$NPROC
 
-# SSO dependencies
-zypper -n install libxmlsec1-1 libxmlsec1-nss1 libxmlsec1-openssl1 xmlsec1-devel xmlsec1-openssl-devel
-pip install python3-saml
-pip2 install python-saml

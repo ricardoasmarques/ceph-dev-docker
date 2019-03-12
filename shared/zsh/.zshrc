@@ -71,6 +71,7 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 export SOURCE_DATE_EPOCH=946684800
+export PATH=/shared/bin:${PATH}
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -96,3 +97,6 @@ export SOURCE_DATE_EPOCH=946684800
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias cdb='cd /ceph/build'
+alias cdbd='cd /ceph/build/src/pybind/mgr/dashboard'
+alias cdsd='cd /ceph/src/pybind/mgr/dashboard'

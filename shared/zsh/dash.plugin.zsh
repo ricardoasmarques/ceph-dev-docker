@@ -25,7 +25,3 @@ _dash() {
 
 compdef _dash dash
 
-alias cdb='cd /ceph/build'
-alias cdbd='cd /ceph/build/src/pybind/mgr/dashboard'
-alias cdsd='cd /ceph/src/pybind/mgr/dashboard'
-export PATH=/shared/bin:${PATH}

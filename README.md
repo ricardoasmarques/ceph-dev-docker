@@ -15,6 +15,15 @@ environment.
 `docker` command requires root privileges.
 To remove this requirement you can join the `docker` user group.
 
+### Older ceph releases
+
+When developing for older ceph versions you should use the dedicated dockerfile
+for that release, p.e. we have a `mimic.Dockerfile`.
+
+To create a container with that dockerfile you can either call `setup.sh` with
+`VERSION` var specified or add `-f <version>.Dockerfile` to the docker build
+command.
+
 ### setup.sh
 
 This script can be used to get a working container with 1 command.
@@ -31,6 +40,8 @@ You can customize the outcome of the script with the following env variables:
 change this. default: `ceph-1`.
 - `CEPH` - Path to the ceph repository. default: `../ceph`
 - `CCACHE` - Path to ccache. default: `../ceph-ccache`
+- `VERSION` - Specify an already released ceph version which you are going work
+on. Available versions: `mimic`.
 
 Note: CEPH and CCACHE need to be absolute paths.
 
