@@ -15,6 +15,10 @@ case "$VERSION" in
   TAG="ceph-dev-docker-mimic"
   docker build -t $TAG -f mimic.Dockerfile .
   ;;
+"nautilus")
+  TAG="ceph-dev-docker-nautilus"
+  docker build -t $TAG -f nautilus.Dockerfile .
+  ;;
 *)
   TAG="ceph-dev-docker"
   docker build -t $TAG .
