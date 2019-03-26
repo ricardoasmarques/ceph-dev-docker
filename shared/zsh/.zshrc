@@ -100,3 +100,4 @@ export PATH=/shared/bin:${PATH}
 alias cdb='cd /ceph/build'
 alias cdbd='cd /ceph/build/src/pybind/mgr/dashboard'
 alias cdsd='cd /ceph/src/pybind/mgr/dashboard'
+alias activate='source /ceph/build/src/pybind/mgr/dashboard/node-env/bin/activate .'
