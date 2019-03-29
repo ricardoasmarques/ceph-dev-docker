@@ -38,10 +38,10 @@ You can customize the outcome of the script with the following env variables:
 
 - `NAME` - Name of the container. If you want more than 1 container you need to
 change this. default: `ceph-1`.
-- `CEPH` - Path to the ceph repository. default: `../ceph`
-- `CCACHE` - Path to ccache. default: `../ceph-ccache`
+- `CEPH` - Path to the ceph repository. Default: `../ceph`
+- `CCACHE` - Path to ccache. Default: `../ceph-ccache`
 - `VERSION` - Specify an already released ceph version which you are going work
-on. Available versions: `mimic`.
+on. Default: `master`. Available versions: `mimic`, `nautilus`.
 
 Note: CEPH and CCACHE need to be absolute paths.
 
