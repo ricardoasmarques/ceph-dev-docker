@@ -1,6 +1,6 @@
 # ceph-dev-docker
 
-The purpose of this docker image is to ease the local development of Ceph, by
+The purpose of these docker images is to ease the local development of Ceph, by
 providing a container-based runtime and development environment (based on
 openSUSE "Tumbleweed").
 
@@ -10,12 +10,13 @@ environment.
 
 ## Usage
 
-### docker user group
+### Docker User Group
 
-`docker` command requires root privileges.
-To remove this requirement you can join the `docker` user group.
+The `docker` command usually requires root privileges. On some Linux
+distributions, you can add your user account to the `docker` user group to
+remove this requirement.
 
-### Older ceph releases
+### Older Ceph Releases
 
 When developing for older ceph versions you should use the dedicated dockerfile
 for that release, p.e. we have a `mimic.Dockerfile`.
@@ -43,7 +44,7 @@ change this. Default: `ceph-1`.
 - `VERSION` - Specify an already released ceph version which you are going work
 on. Default: `master`. Available versions: `mimic`, `nautilus`.
 
-Note: CEPH and CCACHE need to be absolute paths.
+Note: `CEPH` and `CCACHE` need to be absolute paths.
 
 
 ### Build the Image
@@ -73,7 +74,7 @@ clone from, e.g. `https://github.com/ceph/ceph.git`:
 Now switch or create your development branch using `git checkout` or `git
 branch`.
 
-### Starting the Container and building Ceph
+### Starting the Container and Building Ceph
 
 Now start up the container, by mounting the local git clone directory as
 `/ceph`:
@@ -132,7 +133,7 @@ This script reads the following env variables:
     // default: false
     CLEAN=true
 
-### Docker container lifecycle
+### Docker Container Lifecycle
 
 To start a container run,
 
@@ -159,7 +160,7 @@ Finally, to stop the container,
 
     # docker stop ceph-dev
 
-### Multiple docker containers
+### Multiple Docker Containers
 
 If you want to run multiple docker containers, you just need to modify the
 previous `docker run` command with a different local ceph directory and replace
@@ -181,9 +182,9 @@ Now if you want to access this container just run,
 
     # docker attach new-ceph-container
 
-## Working on ceph dashboard
+## Working on Ceph Dashboard
 
-There are some scripts that can be useful if you are working on ceph dashboard.
+There are some scripts that can be useful if you are working on Ceph Dashboard.
 
 All of them are now accessible through the `dash` command:
 
@@ -218,13 +219,13 @@ can grow very quickly (several GB within a few hours).
     (docker)# cd /ceph/build
     (docker)# bin/ceph -s
 
-### Stop Ceph development environment
+### Stop Ceph Development Environment
 
     (docker)# stop-ceph.sh
     # OR
     (docker)# dash stop-ceph
 
-### Reload dashboard module (Backend)
+### Reload Dashboard Module (Backend)
 
 Run the following script to reflect changes in python files:
 
@@ -232,7 +233,7 @@ Run the following script to reflect changes in python files:
     # OR
     (docker)# dash reload-dashboard
 
-### Start development server (Frontend)
+### Start Development Server (Frontend)
 
 The following script will start a frontend development server that can be
 accessed at [http://localhost:4200](http://localhost:4200):
@@ -241,20 +242,21 @@ accessed at [http://localhost:4200](http://localhost:4200):
     # OR
     (docker)# dash npm-start
 
-## External services
+## External Services
 
 To run preconfigured external services, you can simply use `docker-compose`.
 
 > If you do not have `docker-compose` installed on your system, follow these
 [instructions](https://docs.docker.com/compose/install/).
 
-### Starting services
+### Starting Services
 
 Running the following command will start all containers, one for each service.
 
     docker-compose up
 
-Note that this will *not* start `ceph-dev-docker`.
+Note that this will *not* start `ceph-dev-docker`. See the instructions above on
+how to perform this task.
 
 You can also start a single service by providing the name of the services as
 they are configured in the `docker-compose.yml` file.
@@ -273,7 +275,7 @@ them:
 
 After starting all containers, the following external services will be available:
 
-| Tool           | URL                   | User                       | Pass  |
+| Service        | URL                   | User                       | Pass  |
 | -------------- | --------------------- | -------------------------- | ----- |
 | Grafana        | http://localhost:3000 | admin                      | admin |
 | Prometheus     | http://localhost:9090 | -                          | -     |
@@ -284,15 +286,16 @@ After starting all containers, the following external services will be available
 | PHP LDAP Admin | https://localhost:90  | cn=admin,dc=example,dc=org | admin |
 | Shibboleth     | http://localhost:9080/Shibboleth.sso/Login | admin     | admin |
 
-### Using Prometheus
+### Enabling Prometheus
 
-All ports in use can be found in `prometheus/prometheus.yml`.
+All TCP ports in use can be found in `prometheus/prometheus.yml`.
 
 To start Prometheus, Grafana and Node exporter, run:
 
     docker-compose up alertmanager grafana node-exporter prometheus
 
-In order to connect with prometheus to your running docker instance, enable prometheus in it with:
+In order to connect with Prometheus to your running docker instance, enable
+Prometheus in it with:
 
     ceph mgr module enable prometheus
 
@@ -315,8 +318,24 @@ There are 7 alerts configured, you can find them in 'prometheus/alert.rules'.
 The alerts have nothing to do with your cluster state (ATM), just with your system load.
 'load0' fires if your system load is greater than zero, this means it's always on.
 
+### Enabling Grafana
 
-### Configure SSO
+The Grafana container is pre-configured to access the Prometheus container as
+a data source. The Grafana dashboards are taken from the ceph git repository
+when creating the container (by assuming that the ceph git repo is located
+in the same directory as the ceph-dev-docker git repo). Grafana scans this
+directory for changes every 10 seconds.
+
+To configure the embedding of the Grafana dashboards into the Ceph Manager
+Dashboard, run the following command inside the ceph-dev container where Ceph
+is up and running::
+
+    (ceph-dev)# bin/ceph dashboard set-grafana-api-url http://localhost:3000
+
+See the Ceph Dashboard documentation for additional information about the
+Grafana integration.
+
+### Configuring SSO
 
 Add the following entry to your `/etc/hosts`:
 
@@ -368,20 +387,6 @@ Setup `shibboleth` IdP:
     (shibboleth)# $JETTY_HOME/bin/jetty.sh restart
 
 > Note: SLO is not fully configured, yet
-
-### Grafana
-
-The Grafana container is pre-configured to access the Prometheus container as
-a data source. The Grafana dashboards are taken from the ceph git repository
-when creating the container (by assuming that the ceph git repo is located
-in the same directory as the ceph-dev-docker git repo). Grafana scans this
-directory for changes every 10 seconds.
-
-To configure the embedding of the Grafana dashboards into the Ceph Manager
-Dashboard, run the following command inside the ceph-dev container where Ceph
-is up and running::
-
-    (ceph-dev)# bin/ceph dashboard set-grafana-api-url http://localhost:3000
 
 ## Troubleshooting
 
