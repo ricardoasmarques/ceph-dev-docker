@@ -32,7 +32,8 @@ RUN /docker/install-omz.sh
 
 ENV CEPH_ROOT /ceph
 ENV BUILD_DIR /ceph/build
-ENV MIMIC true
+
+ENV PATH="/shared/bin/mimic:${PATH}"
 
 VOLUME ["/ceph"]
 VOLUME ["/shared"]

@@ -25,6 +25,9 @@ To create a container with that dockerfile you can either call `setup.sh` with
 `VERSION` var specified or add `-f <version>.Dockerfile` to the docker build
 command.
 
+For each release there will exist a specific bin folder that will have priority
+over the shared bin scripts.
+
 ### setup.sh
 
 This script can be used to get a working container with 1 command.
