@@ -8,3 +8,4 @@ receivers:
   - name: 'ceph-dashboard'
     webhook_configs:
     - url: 'http://localhost:4200/api/prometheus_receiver'
+    - url: 'http://localhost:9099/'
