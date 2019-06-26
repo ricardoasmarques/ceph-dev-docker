@@ -15,13 +15,6 @@ NPROC=${NPROC:-$(nproc --ignore=2)}
 zypper -n install libxmlsec1-1 libxmlsec1-nss1 libxmlsec1-openssl1 xmlsec1-devel xmlsec1-openssl-devel
 pip install python3-saml
 
-# temporary fix, spdk doesn't work with gcc9
-rm /usr/bin/gcc
-rm /usr/bin/g++
-
-ln -s /usr/bin/gcc-8 /usr/bin/gcc
-ln -s /usr/bin/g++-8 /usr/bin/g++
-
 if [ "$CLEAN" == "true" ]; then
     echo "CLEAN INSTALL"
     rm -rf /ceph/build/
