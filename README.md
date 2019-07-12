@@ -288,6 +288,7 @@ After starting all containers, the following external services will be available
 | LDAP           | ldap://localhost:2389 | cn=admin,dc=example,dc=org | admin |
 | PHP LDAP Admin | https://localhost:90  | cn=admin,dc=example,dc=org | admin |
 | Shibboleth     | http://localhost:9080/Shibboleth.sso/Login | admin     | admin |
+| HAProxy        | https://localhost/    | -                          | -     |
 
 ### Enabling Prometheus
 
@@ -390,6 +391,44 @@ Setup `shibboleth` IdP:
     (shibboleth)# $JETTY_HOME/bin/jetty.sh restart
 
 > Note: SLO is not fully configured, yet
+
+### Enabling HAProxy
+
+For testing Ceph Dashboard HA you should run multiple Ceph Managers. To do so
+execute the following command in your Ceph development environment:
+
+    # export MGR=3
+    # start-ceph.sh
+
+Now you have to update the HAProxy configuration file `./haproxy/haproxy.conf`
+and adapt the host ports of your running Ceph Dashboards. You will find them
+in the output of the `vstart.sh` script. After that start the HAProxy:
+
+    # docker-compose up haproxy
+
+or if you want to enable all services:
+
+    # docker-compose up haproxy alertmanager grafana node-exporter prometheus
+
+Now you can reach the Ceph Dashboard via
+
+    * http://localhost/
+    * https://localhost/
+
+To simulate a failover you have to find out which node is active. This can be
+done by running:
+
+    # ceph status
+
+To force a failover you simply have to execute the following command on one of
+your Ceph Manager nodes x, y or z:
+
+    # ceph mgr fail <ACTIVE_MGR>
+    # ceph mgr fail x
+
+If you are logged into the Dashboard via HTTPS while a failover occurs, then
+you will get error messages because of the changed SSL certificate of the new
+active Ceph Dashboard instance. Please refresh the browser to fix this.
 
 ## Troubleshooting
 
