@@ -76,3 +76,9 @@ services:
       - "9443:9443"
     links:
       - openldap
+
+  haproxy:
+    image: 'haproxy'
+    volumes:
+      - './haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg'
+    network_mode: 'host'
