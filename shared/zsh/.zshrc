@@ -72,6 +72,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 export SOURCE_DATE_EPOCH=946684800
 export PATH=${PATH}:/shared/bin
+export NG_CLI_ANALYTICS="false"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
