@@ -17,9 +17,7 @@ pip install python3-saml
 
 if [ "$CLEAN" == "true" ]; then
     echo "CLEAN INSTALL"
-    rm -rf /ceph/build/
-    rm -rf /ceph/src/pybind/mgr/dashboard/frontend/node_modules/
-    rm -rf /ceph/src/pybind/mgr/dashboard/frontend/dist/
+    git clean -fdx
 fi
 
 if [ -d "build" ]; then
@@ -32,4 +30,3 @@ else
 fi
 
 ccache make -j$NPROC
-
