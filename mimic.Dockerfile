@@ -31,7 +31,6 @@ ENV ZSH_DISABLE_COMPFIX true
 RUN /docker/install-omz.sh
 
 ENV CEPH_ROOT /ceph
-ENV BUILD_DIR /ceph/build
 
 ENV PATH="/shared/bin/mimic:${PATH}"
 
