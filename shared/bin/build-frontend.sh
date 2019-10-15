@@ -6,7 +6,7 @@ cd /ceph/src/pybind/mgr/dashboard/frontend
 source /ceph/build/src/pybind/mgr/dashboard/node-env/bin/activate
 npm i
 
-npm run build
+npm run build:en-US
 
 cd /ceph/build
 bin/ceph mgr services
