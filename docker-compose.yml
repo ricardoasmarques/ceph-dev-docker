@@ -36,6 +36,8 @@ services:
       - './grafana/ceph-dashboards.yaml:/etc/grafana/provisioning/dashboards/ceph-dashboards.yaml:ro'
       - './grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml:ro'
       - './grafana/grafana.ini:/etc/grafana/grafana.ini:ro'
+      - './grafana/grafana_ssl_cert.crt:/etc/grafana/grafana_ssl_cert.crt'
+      - './grafana/grafana_ssl_cert.key:/etc/grafana/grafana_ssl_cert.key'
       - '../ceph/monitoring/grafana/dashboards:/var/lib/grafana/dashboards/:ro'
     environment:
       GF_INSTALL_PLUGINS: vonage-status-panel,grafana-piechart-panel
