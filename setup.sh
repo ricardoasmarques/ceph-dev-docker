@@ -30,6 +30,8 @@ docker run -itd \
   -v $CEPH:/ceph \
   -v $CCACHE:/root/.ccache \
   -v $(pwd)/shared:/shared \
+  -v /run/udev:/run/udev:ro \
+  --privileged \
   --net=host \
   --name=$NAME \
   --hostname=$NAME \
