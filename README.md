@@ -339,6 +339,18 @@ is up and running::
 See the Ceph Dashboard documentation for additional information about the
 Grafana integration.
 
+#### Enabling SSL
+
+To enable SSL in Grafana you need to modify the 'grafana/grafana.ini' file.
+
+    [server]
+    protocol = https
+
+After that run the following command inside the ceph-dev container where Ceph
+is up and running::
+
+    (ceph-dev)# bin/ceph dashboard set-grafana-api-url https://localhost:3000
+
 ### Configuring SSO
 
 Add the following entry to your `/etc/hosts`:
