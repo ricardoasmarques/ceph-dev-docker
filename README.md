@@ -310,9 +310,10 @@ Now the following services should be found:
 * [Alertmanager](http://localhost:9093)
 * [Grafana](http://localhost:3000)
 
-In order to enable connections from the dashboard to the Alertmanager API run:
+In order to enable connections from the dashboard to the Alertmanager and Prometheus API run:
 
     ceph dashboard set-alertmanager-api-host 'http://localhost:9093'
+    ceph dashboard set-prometheus-api-host http://localhost:9090
 
 After you have connected the API to the dashboard reload the page.
 After some minutes you should see a new tab inside the notification popover.
