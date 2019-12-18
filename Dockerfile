@@ -21,7 +21,8 @@ RUN zypper -n install \
         python3-requests \
         python3-Routes \
         python3-Werkzeug \
-        python3-scipy
+        python3-scipy \
+        python3-remoto
 
 # temporary fix for error regarding version of tempora
 RUN pip3 install tempora==1.8 backports.functools_lru_cache
