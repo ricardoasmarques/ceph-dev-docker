@@ -312,7 +312,7 @@ Now the following services should be found:
 
 In order to enable connections from the dashboard to the Alertmanager and Prometheus API run:
 
-    ceph dashboard set-alertmanager-api-host 'http://localhost:9093'
+    ceph dashboard set-alertmanager-api-host http://localhost:9093
     ceph dashboard set-prometheus-api-host http://localhost:9090
 
 After you have connected the API to the dashboard reload the page.
