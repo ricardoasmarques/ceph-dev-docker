@@ -23,6 +23,7 @@ RUN zypper -n install \
         python3-Jinja2 \
         python3-PrettyTable \
         python3-PyJWT \
+        python3-PyYAML \
         python3-Routes \
         python3-Werkzeug \
         python3-bcrypt \
