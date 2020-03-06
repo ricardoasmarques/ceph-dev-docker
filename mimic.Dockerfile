@@ -6,7 +6,7 @@ RUN zypper -n dup
 RUN zypper -n install \
         aaa_base babeltrace-devel bash bzip2 ccache git \
         google-opensans-fonts iproute2 jq lttng-ust-devel \
-        net-tools-deprecated psmisc tmux vim wget zsh \
+        net-tools-deprecated psmisc tar tmux vim wget zsh \
         python python2-pip python3-pip \
         python-devel python3-devel \
         python2-bcrypt python3-bcrypt \
