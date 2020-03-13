@@ -4,6 +4,10 @@ set -e
 
 find /ceph/build/ -name "mgr.*.log" -type f -delete
 
+if rpm --quiet --query nfs-ganesha-ceph; then
+    export GANESHA=1
+fi
+
 cd /ceph/build
 RGW=1 ../src/vstart.sh -d -n -x
 
