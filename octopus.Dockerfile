@@ -1,4 +1,4 @@
-FROM opensuse/tumbleweed
+FROM opensuse/leap:15.2
 LABEL maintainer="rimarques@suse.com"
 
 RUN zypper --gpg-auto-import-keys ref
@@ -18,12 +18,11 @@ RUN zypper -n install \
         python3-PyJWT \
         python3-pylint \
         python3-pyOpenSSL \
-        python3-PyYAML \
-        python3-remoto \
         python3-requests \
         python3-Routes \
+        python3-Werkzeug \
         python3-scipy \
-        python3-Werkzeug
+        python3-remoto
 
 # temporary fix for error regarding version of tempora
 RUN pip3 install tempora==1.8 backports.functools_lru_cache
