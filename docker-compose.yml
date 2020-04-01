@@ -15,7 +15,7 @@ services:
   prometheus:
     image: 'prom/prometheus'
     volumes:
-      - './prometheus/alert.rules:/etc/prometheus/alert.rules'
+      - './prometheus/rules:/etc/prometheus/rules'
       - './prometheus/prometheus.yml:/etc/prometheus/prometheus.yml'
     container_name: 'prometheus'
     network_mode: 'host'
