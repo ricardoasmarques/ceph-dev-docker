@@ -24,4 +24,5 @@ alerting:
       - 'localhost:9093'
 
 rule_files:
- - 'alert.rules'
+  - 'rules/*.rules'
+  - 'rules/*.yml'
