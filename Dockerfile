@@ -23,7 +23,8 @@ RUN zypper -n install \
         python3-requests \
         python3-Routes \
         python3-scipy \
-        python3-Werkzeug
+        python3-Werkzeug \
+        xvfb-run
 
 # temporary fix for error regarding version of tempora
 RUN pip3 install tempora==1.8 backports.functools_lru_cache
@@ -39,6 +40,7 @@ ENV ZSH_DISABLE_COMPFIX true
 RUN /docker/install-omz.sh
 
 ENV CEPH_ROOT /ceph
+ENV CYPRESS_CACHE_FOLDER /ceph/build/src/pybind/mgr/dashboard/cypress
 
 VOLUME ["/ceph"]
 VOLUME ["/shared"]
