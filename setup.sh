@@ -9,23 +9,25 @@ VERSION="${VERSION:-master}"
 docker stop $NAME
 docker rm $NAME
 
+DOCKER_BUILD_OPTS="--pull"
+
 # Build updated version of the image
 case "$VERSION" in
 "mimic")
   TAG="ceph-dev-docker-mimic"
-  docker build -t $TAG -f mimic.Dockerfile .
+  docker build $DOCKER_BUILD_OPTS -t $TAG -f mimic.Dockerfile .
   ;;
 "nautilus")
   TAG="ceph-dev-docker-nautilus"
-  docker build -t $TAG -f nautilus.Dockerfile .
+  docker build $DOCKER_BUILD_OPTS -t $TAG -f nautilus.Dockerfile .
   ;;
 "octopus")
   TAG="ceph-dev-docker-octopus"
-  docker build -t $TAG -f octopus.Dockerfile .
+  docker build $DOCKER_BUILD_OPTS -t $TAG -f octopus.Dockerfile .
   ;;
 *)
   TAG="ceph-dev-docker"
-  docker build -t $TAG .
+  docker build $DOCKER_BUILD_OPTS -t $TAG .
   ;;
 esac
 

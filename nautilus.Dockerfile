@@ -1,4 +1,4 @@
-FROM opensuse/leap:15.0
+FROM opensuse/leap:15.1
 LABEL maintainer="rimarques@suse.com"
 
 RUN zypper --gpg-auto-import-keys ref
