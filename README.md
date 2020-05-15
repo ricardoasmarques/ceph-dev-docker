@@ -196,6 +196,16 @@ All of them are now accessible through the `dash` command:
 When you press `tab` it will show you a list of all scripts and their
 description.
 
+### Enable NFS-Ganesha support (Optional)
+
+If you need to test NFS feature in Ceph Dashboard, at least one nfs-ganesha
+daemon must be provisioned. The `start-ceph.sh` script that introduced in the
+later session will ask `vstart` script to spawn a nfs-ganesha daemon if
+required packages are installed. Run the following script to install required
+packages:
+
+    (docker)# setup-nfs.sh
+
 ### Start Ceph Development Environment
 
 To start up the compiled Ceph cluster, you can use the `vstart.sh` script, which
