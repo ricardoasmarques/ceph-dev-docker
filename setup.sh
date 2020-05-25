@@ -37,6 +37,7 @@ docker run -itd \
   -v $CCACHE:/root/.ccache \
   -v $(pwd)/shared:/shared \
   -v /run/udev:/run/udev:ro \
+  -v ~/.ssh:/root/.ssh:ro \
   --privileged \
   --net=host \
   --name=$NAME \
