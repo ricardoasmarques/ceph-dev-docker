@@ -62,7 +62,7 @@ ZSH_THEME="bira"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git npm suse pip colored-man-pages dash
+  git npm suse pip colored-man-pages dash binds
 )
 
 source $ZSH/oh-my-zsh.sh
