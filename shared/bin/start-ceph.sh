@@ -5,7 +5,11 @@ set -e
 find /ceph/build/ -name "mgr.*.log" -type f -delete
 
 if rpm --quiet --query nfs-ganesha-ceph; then
-    export GANESHA=1
+    if grep -q pacific /ceph/src/ceph_release; then
+        export NFS=1
+    else
+        export GANESHA=1
+    fi
 fi
 
 cd /ceph/build
