@@ -42,6 +42,7 @@ RUN /docker/install-omz.sh
 
 ENV CEPH_ROOT /ceph
 ENV CYPRESS_CACHE_FOLDER /ceph/build/src/pybind/mgr/dashboard/cypress
+ENV DASHBOARD_FRONTEND_LANGS ALL
 
 VOLUME ["/ceph"]
 VOLUME ["/shared"]
