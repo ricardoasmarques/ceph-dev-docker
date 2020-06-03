@@ -255,6 +255,31 @@ accessed at [http://localhost:4200](http://localhost:4200):
     # OR
     (docker)# dash npm-start
 
+### Setup system to use the cephadm Vagrant box
+
+Ceph provides a Vagrant box that can be used with this Docker container.
+
+To be able to interact with this Vagrant box you need to start it and
+extract the SSH configuration. Note, your Docker container must be started
+with the `-v ~/.ssh:/root/.ssh:ro` command line arguments to be able to
+establish a SSH connection between the Vagrant box and your Docker container.
+
+To start the Vagrant box go to `src/pybind/mgr/cephadm` and run:
+
+    # vagrant up
+
+After that extract the SSH configuration.
+
+    # vagrant ssh-config > ssh-config
+
+Now you need to setup everything in your Docker container by running:
+
+    # setup-cephadm.sh
+
+This will enable the Ceph Manager module called `cephadm` and setup the
+SSH configuration. Additionally the IP addresses of the Vagrant box nodes
+will be added to the `/etc/hosts` file.
+
 ## External Services
 
 To run preconfigured external services, you can simply use `docker-compose`.
