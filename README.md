@@ -120,6 +120,13 @@ the required build dependencies and then build Ceph from source.
 
     (docker)# setup-ceph.sh
 
+If you need to limit the number of build jobs you can do the following:
+
+    NPROC=2 setup-ceph.sh
+
+`NPROC` can be set to any value which is lower or equal to your number of
+logical CPU cores.
+
 This script reads the following env variables:
 
     // Determines which gcc version should be used. If 'true' it will use gcc7,
