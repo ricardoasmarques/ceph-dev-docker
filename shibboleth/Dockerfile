@@ -2,19 +2,19 @@ FROM opensuse/tumbleweed
 
 RUN zypper --gpg-auto-import-keys ref
 RUN zypper -n dup
-RUN zypper -n install java-1_8_0-openjdk-devel curl wget tar
+RUN zypper -n install java-1_8_0-openjdk-devel curl wget tar gzip
 ENV JAVA_HOME=/usr/lib64/jvm/java-1.8.0-openjdk
-RUN curl https://shibboleth.net/downloads/identity-provider/latest/shibboleth-identity-provider-3.4.6.tar.gz \
-         --output shibboleth-identity-provider-3.4.6.tar.gz
+RUN curl https://shibboleth.net/downloads/identity-provider/3.4.7/shibboleth-identity-provider-3.4.7.tar.gz \
+         --output shibboleth-identity-provider-3.4.7.tar.gz
 RUN curl https://repo1.maven.org/maven2/org/eclipse/jetty/jetty-distribution/9.4.10.v20180503/jetty-distribution-9.4.10.v20180503.tar.gz \
         --output jetty-distribution-9.4.10.v20180503.tar.gz
 
-RUN tar zxvf shibboleth-identity-provider-3.4.6.tar.gz
-RUN sed -i -e 's!idp.entityID = https://idp.example.org!idp.entityID = https://cephdashboard/idp!g' /shibboleth-identity-provider-3.4.6/conf/idp.properties
-RUN sed -i -e 's!idp.scope = example.org!idp.scope = ceph-dev-docker.org!g' /shibboleth-identity-provider-3.4.6/conf/idp.properties
-RUN cd shibboleth-identity-provider-3.4.6 && \
+RUN tar zxvf shibboleth-identity-provider-3.4.7.tar.gz
+RUN sed -i -e 's!idp.entityID = https://idp.example.org!idp.entityID = https://cephdashboard/idp!g' /shibboleth-identity-provider-3.4.7/conf/idp.properties
+RUN sed -i -e 's!idp.scope = example.org!idp.scope = ceph-dev-docker.org!g' /shibboleth-identity-provider-3.4.7/conf/idp.properties
+RUN cd shibboleth-identity-provider-3.4.7 && \
     ./bin/install.sh -Didp.target.dir=/opt/shibboleth-idp -Didp.host.name=localhost \
-                     -Didp.src.dir=/shibboleth-identity-provider-3.4.6 -Didp.noprompt=true \
+                     -Didp.src.dir=/shibboleth-identity-provider-3.4.7 -Didp.noprompt=true \
                      -Didp.merge.properties=conf/idp.properties -Didp.scope=ceph-dev-docker.org \
                      -Didp.keystore.password=password -Didp.sealer.password=password
 
