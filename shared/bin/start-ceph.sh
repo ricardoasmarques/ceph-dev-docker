@@ -5,10 +5,9 @@ set -e
 find /ceph/build/ -name "mgr.*.log" -type f -delete
 
 if rpm --quiet --query nfs-ganesha-ceph; then
-    if grep -q pacific /ceph/src/ceph_release; then
+    CEPH_VERSION=$(head -n1 /ceph/src/ceph_release) 
+    if [ $CEPH_VERSION -ge 15 ]; then
         export NFS=1
-    else
-        export GANESHA=1
     fi
 fi
 
