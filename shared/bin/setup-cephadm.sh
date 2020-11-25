@@ -26,6 +26,15 @@ fi
 
 cd /ceph/build
 
+# Disable these cephadm stray warnings, otherwise the cluster reports
+# health warnings which prevents deploying services.
+# This happens because vstart hosts and daemons are not managed by
+# cephadm.
+# https://docs.ceph.com/en/latest/cephadm/operations/#cephadm-stray-host
+bin/ceph config set mgr mgr/cephadm/warn_on_stray_hosts false
+#https://docs.ceph.com/en/latest/cephadm/operations/#cephadm-stray-daemon
+bin/ceph config set mgr mgr/cephadm/warn_on_stray_daemons false
+
 bin/ceph config-key set mgr/cephadm/ssh_identity_key -i /root/.ssh/id_rsa
 bin/ceph config-key set mgr/cephadm/ssh_identity_pub -i /root/.ssh/id_rsa.pub
 
