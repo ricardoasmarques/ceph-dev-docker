@@ -1,5 +1,7 @@
 # ceph-dev-docker
 
+**This project was migrated to https://github.com/suse/ceph-dev-docker**
+
 The purpose of these docker images is to ease the local development of Ceph, by
 providing a container-based runtime and development environment (based on
 openSUSE "Tumbleweed").
